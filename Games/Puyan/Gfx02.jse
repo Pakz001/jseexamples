@@ -1,0 +1,74 @@
+// puyan
+// by <Your Name Here!>
+// Created 2022/5/15
+
+Symbol 0,"1__6?5.252,006!556252,006?5!262,6?56556552,06/5?22006/5525522006/565,22006!5,6552,06!5535,2.6?565.2,006?5,655226206!5?2?6!5562552,06@5.62,6/5.262206!565252,";
+Symbol 1,"1__20_0!20_0!220_0?2,0_0.25220_0,2.0_0,2,520_00252?0_252!0@25,2!0!25.225220!25?25220!2,5.2.0?25/2.0.225!2252,00225!2@";
+Symbol 2,"1__0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0?R,SSR,SR.SR_R_7_7/6_6_6_6?";
+Symbol 3,"1__0_0_0_0_0_0_0070_0?7K70_0.7,0_0?S0_0!R00R0_R00R00R0_0P0R0P0_0,P,";
+Symbol 4,"1__0_0_0_0_0_0,SS0,SSQSS0S0.Q,S0Q?S?0Q,SSQ?SQSQS0Q.SQ.SQQS,0Q_Q!0Q_Q!0Q_Q,SQQ0Q.SQ?SQQSS0QQSSQ?SSQSS00SQS0SQQSQSS0?S0,SQS,0_0?S";
+Symbol 5,"1__0_0_0_0_0_0,SS0,SSQSS0S0.Q,S0Q?S?0Q,SSQ?SQSQS0Q.SQ.SQQS,Q_Q_Q_Q_Q_SSQ_Q_Q_Q_Q?S,Q_SRQ/SQ.S.Q@SQ,SQ_Q?";
+Symbol 6,"1__Q_Q?SSQ_Q?SSQ_Q!0Q,SQ?SQSQ,0Q_Q.S00Q_QSSQS00Q?SQQSQQSS0,Q/SQ,S0.Q_S,0.Q_QSS0.QSQ@SS0.Q_QS0?Q.S,QSQ0!Q,SQS.0/SQSSQ0S,0_0SS";
+Symbol 7,"1__Q_Q_Q.SQ_Q_Q_Q_Q_Q@SQ.SSQ!SQ,SQ_QQSQ_QSSQ_Q_Q?SQ.SQ_QSQ,SQSQSQ,SQ@SQ_QQSSQSSQSQ.SQSQQS/QSSQS.QSS00S.00S!0!S0/S";
+Symbol 8,"1__Q_Q/S,Q!SQ!0SSQ_Q.0SQSSQ@SQQ00SQQSQ/SQS0SSQ!SQ!0,SSQ,SQ/0.S.Q@0?SSQ_0/SQ@0/Q,SQ?0@QSQSQ.0_SSQQSSQ0_00S?0_0,S";
+Symbol 9,"1__Q_Q_Q_QSQ.S.Q_Q?SQ_Q_Q_Q_Q,SQ_Q_Q/SQ/SSQ/SQ_Q_Q_QSQ_Q_Q.S,Q_Q!SQ_QSQ,SQ?SQ_Q_Q_Q,";
+Symbol 10,"1__6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6.";
+Symbol 11,"1__Q_Q_Q.SQ_Q_Q_Q_Q_Q@SQ.SSQ!SQ,SQ_QQSQ_QSSQ_Q_Q?SQ.SQ_QSQ,SQSQSQ,SQ@SQ_QQSSQSSQSQ.SQSQQS/QSSQS.QSS66S.66S!6!S6/S6,";
+
+
+Graphics 512,512,1
+cls 0,0,200
+Print "Hello World"
+
+settilemapsize 32,32
+settile(11,0,4)
+settile(10,0,4)
+for i=0 to 9
+settile(i,0,5)
+next
+settile(9,1,6)
+settile(8,1,7)
+settile(7,1,8)
+
+settile(6,1,6)
+settile(5,1,7)
+for i=0 to 4
+settile(i,1,9)
+next
+settile(4,2,6)
+for i=0 to 3
+settile(i,2,9)
+next
+settile(3,3,6)
+
+for i=0 to 1
+settile(i,3,11)
+next
+settile(i,3,7)
+
+for i=4 to 10
+settile(0,i,10)
+settile(1,i,0)
+next
+
+drawtilemap 10,10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
