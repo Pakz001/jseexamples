@@ -6,3 +6,5 @@ visit gotojse.com for a browser based Basic like development suite. a bit of a f
 has documentation and lots of examples to get started. ( also visit socoder.net or agameaweek.com)
 <br>
 works on browsers. phones / tablets / laptops / desktops / (tv's?)
+<br><br>
+create a new project and paste a jse file inside it. gfx/sound/music will be parsed into the build in editors automatically. this is data inside the source code.
