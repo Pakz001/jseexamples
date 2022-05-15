@@ -1,0 +1,18 @@
+// jay fade
+// by <Your Name Here!>
+// Created 2022/5/15
+
+
+Graphics 512,512,1
+
+For x=0 to 900 step 4
+CLS:ResetDraw
+	SetCol 0,120,0:Rect 0,0,512,512
+	SetCol 0,128,255:SetFontSize 32:Text 256,256,"Hello World",1
+	
+
+	SetCol 0,0,0
+	SetThick 900-x
+	DrawOval 256,256,900,900,128
+Flip
+next
