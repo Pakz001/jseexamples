@@ -1,0 +1,69 @@
+// circle fade in
+// by <Your Name Here!>
+// Created 2022/5/15
+
+Graphics 512,512,1
+Print "Hello World"
+
+px = screenwidth()/2
+py = screenheight()/2
+d = 0
+cnt=1
+repeat 
+	cls 40,100,0
+	setscale 4,4
+	drawtext screenwidth()/8,screenheight()/2,"Welcome!"
+	setscale 1,1
+	if d<screenwidth()/1.5 then gosub fadeout
+
+
+	flip
+forever
+end
+.fadeout
+// step value for circle between pixels
+// decrease the step until distance is less then 1 pixel.
+st = 1
+repeat
+	st=st-.1
+until distance(cos(0)*d,sin(0)*d,cos(0+st)*d,sin(0+st)*d)<.6
+
+// draw the circle. lines from the edges to the circle edges.
+// also top and botton to circle edges.
+setcolor 0,0,0
+top = screenheight()
+bottom = 0
+for i=0 to 360 step st
+	//drawrect px+cos(i)*d,py+sin(i)*d,2,2
+	if i>90 and i<270 then
+		drawline px+cos(i)*d,py+sin(i)*d,0,py+sin(i)*d
+	else
+		drawline px+cos(i)*d,py+sin(i)*d,screenwidth(),py+sin(i)*d
+	endif
+	q=py+sin(i)*d
+	if q<top then top=q
+	if q>bottom then bottom=q
+next
+fillrect 0,0,screenwidth()+1,top
+fillrect 0,bottom,screenwidth()+1,screenheight()-bottom
+d=d+cnt
+cnt=cnt+.5
+return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
