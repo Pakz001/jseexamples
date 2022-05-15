@@ -1,0 +1,186 @@
+// pea meat and potato
+// by <Your Name Here!>
+// Created 2022/5/13
+
+Symbol 0,"0__0,440!440!440,4_4/0,440!440!44";
+Symbol 1,"0__0_0_0440?4.0.4.0?44";
+Symbol 2,"1__0_0_0_0_0_0_0_0_0_0_0,x0_0/z0D?EEDDEEDzyy;0_0?z0_0?x";
+Symbol 3,"1__0_0_0_0_0_0_QNNQ0_00QO.Q0_PRM;;MRP0/PQS4SS4SQP0!PQROMMORQP0!QQPQvvQPQQ0/SRQSSQRS0_RQNNQR0_00RQQR";
+Symbol 4,"1__0_0_0_0_11210_00242442;z0@5312,10_542112,;z0!5541212420/;522121210/z542,3120_64451220_;6652450_z00656:10_0?y;;0_0?z;";
+Symbol 5,"1__0_0_0_0_0_0_0E,0_00EEDDCDE0@ED,CBCDE0!ED,CBBCDE0!DDC?DDE0?DBCDDC,DDE0?ED,CD.E0!EDED,EDDE0/ED!E0_E!";
+
+nummeat = 0 // 5 meat + 1 potato
+numpotato = 0
+
+Graphics 512,512,1
+Print "Hello World"
+firedelay = 0
+dim sp(32,32)
+maxsp = 10
+sp(0,0)=false
+sp(0,1)=screenwidth()/2
+sp(0,2)=screenheight()/2
+sp(0,3)=0
+sp(0,4)=50
+//state
+sp(0,5)=0
+dim ai(32,32)
+maxai=32
+for i=0 to 16
+ai(i,0)=true
+ai(i,1)=rand(screenwidth())
+ai(i,2)=50
+ai(i,4)=3
+//direction
+ai(i,3)=rand(358)
+next
+
+
+px = screenwidth()/2
+py = screenheight()/2
+pangle = -90
+plen = 48
+
+repeat
+cls
+gosub drawline
+gosub updatespears
+gosub drawupdateai
+gosub pinput
+gosub collision
+gosub drawscore
+flip
+forever
+
+.drawscore
+if nummeat>0 then
+for i = 1 to nummeat
+drawimage 16,32+i*32,4
+next
+endif
+if numpotato>0 then
+for i=1 to numpotato
+drawimage 16,16+256+i*32,5
+next
+endif
+return
+
+.drawupdateai
+setrot 0
+for i=0 to maxai
+if ai(i,0)==true then
+if ai(i,5)==true then
+ai(i,1)=sp(ai(i,6),1)
+ai(i,2)=sp(ai(i,6),2)
+q1=sp(ai(i,6),3)
+ai(i,1)=ai(i,1)+(cos(q1)*32)
+ai(i,2)=ai(i,2)+(sin(q1)*32)
+
+endif
+drawimage ai(i,1),ai(i,2),ai(i,4)
+if ai(i,4)==3 then
+ai(i,1)=ai(i,1)+cos(ai(i,3))/4
+ai(i,2)=ai(i,2)+sin(ai(i,3))/4
+if rand(50)==1 then
+ai(i,3)=rand(359)
+endif
+if rand(50)==1 then
+ai(i,3)=atan2(screenwidth()/2-ai(i,2),screenheight()/2-ai(i,1))
+end if
+endif
+endif
+next
+return
+.pinput
+
+if gamepad(dpadleft,5) then
+pangle=pangle-3
+endif
+if gamepad(dpadright,5) then
+pangle=pangle+3
+endif
+firedelay = firedelay - 1
+if firedelay < 0 and gamepad(buttona,5) then
+firedelay=20
+
+for i=0 to maxsp
+if sp(i,0)==false and then
+sp(i,0)=true
+sp(i,1)=screenwidth()/2
+sp(i,2)=screenheight()/2
+sp(i,3)=pangle
+sp(i,4)=50
+sp(i,5)=0
+sp(i,6)=-1
+exit 1
+end if
+next
+
+endif
+return
+
+.pinputx
+if mousedown() then
+  if mousex()<screenwidth()/2 then
+    pangle=pangle-3
+    else
+    pangle=pangle+3
+  endif
+endif
+return
+.drawline
+tx = px+cos(pangle)*plen
+ty = py+sin(pangle)*plen
+drawline px,py,tx,ty
+setrot pangle
+drawimage px,py,2
+return
+.updatespears
+for i=0 to maxsp
+if sp(i,0)==true
+setrot 0
+drawline sp(i,1),sp(i,2),screenwidth/2,screenheight/2
+setrot sp(i,3)
+drawimage sp(i,1),sp(i,2),2
+
+if sp(i,5)==0 then
+sp(i,1)=sp(i,1)+cos(sp(i,3))*10
+sp(i,2)=sp(i,2)+sin(sp(i,3))*10
+else
+
+sp(i,1)=sp(i,1)-cos(sp(i,3))*10
+sp(i,2)=sp(i,2)-sin(sp(i,3))*10
+endif
+if sp(i,5)==0 then sp(i,4)=sp(i,4)-1
+if sp(i,5)==1 then sp(i,4)=sp(i,4)+1
+if sp(i,4)<0 then sp(i,5)=1
+if sp(i,4)==50 then 
+sp(i,0)=false
+nummeat=nummeat+1
+if nummeat == 5 then nummeat=0 ; numpotato=numpotato+1
+if sp(i,6)>-1 then ai(sp(i,6),0)=false
+endif
+endif
+next
+return
+
+.collision
+for i = 0 to maxsp
+if sp(i,0) ==true then
+for j= 0 to maxai
+if ai(j,0)==true and ai(j,4)==3 then
+if collidepointtocircle(sp(i,1),sp(i,2),ai(j,1),ai(j,2),32,32)==true then
+//ai(j,0)=false
+ai(j,4)=4
+ai(j,5)=true
+ai(j,6)=i
+sp(i,5)=1
+sp(i,6)=j
+//sp(i,0)=false
+exit 2
+endif
+endif
+next
+endif
+next
+return
