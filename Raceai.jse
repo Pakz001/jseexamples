@@ -1,0 +1,99 @@
+// Race track ai
+// by <Your Name Here!>
+// Created 2022/5/16
+
+Graphics 512,512,1
+Print "Hello World"
+
+dim map(256,256)
+dim map2(256,256)
+
+dim targx(5)
+dim targy(5)
+targx(0)=50
+targy(0)=50
+targx(1)=70
+targy(1)=130
+targx(2)=200
+targy(2)=200
+targx(3)=200
+targy(3)=100
+targx(4)=80
+targy(4)=80
+
+for i=0 to 6
+
+x = targx(i)
+y = targy(i)
+
+repeat
+  if i==4 then
+    q1 = targy(0)
+	q2 = targx(0)
+  else
+    q1 = targy(i+1)
+    q2 = targx(i+1)
+  endif
+  a=atan2(q1-y,q2-x)
+  x=x+cos(a)
+  y=y+sin(a)
+  map(x,y)=1
+until distance(x,y,q2,q1)<1
+next
+
+
+// changing the value to higher, when
+// to 6 broke jse. lock up.
+for i=0 to 2
+  gosub edgeenlarge
+next
+
+
+setcolor 255,0,0
+for y=0 to 256
+for x=0 to 256
+if map(x,y)==1 then
+rect x*2,y*2,4,4
+endif
+next
+next
+
+
+end
+
+
+.edgeenlarge
+emptyarray(map2,0)
+for y=1 to 255
+for x=1 to 255
+if map(x,y)==1 then
+for y2=-1 to 1
+for x2=-1 to 1
+map2(x+x2,y+y2) = 1
+next
+next
+endif
+next
+next
+for y=0 to 255
+for x=0 to 255
+map(x,y)=map2(x,y)
+next
+next
+return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
