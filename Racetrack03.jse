@@ -1,0 +1,157 @@
+// Race track 2
+// by <Your Name Here!>
+// Created 2022/5/19
+
+Graphics 512,512,1
+Print "Hello World"
+
+dim flowmap(10,100,100)
+emptyarray(flowmap,0)
+dim tx(10)
+dim ty(10)
+rx =0
+ry=0
+.start
+setbuffer bg
+CLS
+resetdraw
+gosub maketrack
+setbuffer FG
+cls
+resetdraw
+track=0
+trackdest=1
+time=0
+repeat
+time=time+1
+drawbg 512,512
+gosub raceguy;gosub raceguy;gosub raceguy
+flip
+until time>500
+goto start
+
+
+end
+
+.raceguy
+a = flowmap(track,rx/5,ry/5)
+rx=rx+cos(a)
+ry=ry+sin(a)
+if distance(rx,ry,tx(trackdest),ty(trackdest))<10 then
+track=track+1
+trackdest=track+1
+if track == 4 then 
+trackdest=0
+endif
+if track==5 then
+track=0
+trackdest=1
+endif
+endif
+setcolor 255,0,0
+rect rx,ry,5,5
+return
+
+.maketrack
+setcolor 200,200,200
+tx(0)=100
+ty(0)=100
+tx(1)=120
+ty(1)=200
+tx(2)=130
+ty(2)=300
+tx(3)=400
+ty(3)=300
+tx(4)=250
+ty(4)=150
+banana=false
+for i=0 to 4
+  if rand(4) == 1 then banana=true
+  if banana==false then
+    s=40
+  else
+    s=80
+  endif
+  tx(i)=tx(i)+rand(-s,s)
+  ty(i)=ty(i)+rand(-s,s)
+
+next
+// set racebot on track
+rx = tx(0)
+ry = ty(0)
+
+// get angle from point to next point
+// and draw a wide line towards it.
+xa=tx(0)
+ya=ty(0)
+for i=0 to 4
+if i==4 then
+xb = tx(0)
+yb = ty(0)
+else
+xb=tx(i+1)
+yb=ty(i+1)
+endif
+a = atan2(yb-ya,xb-xa)
+repeat
+xa=xa+cos(a)
+ya=ya+sin(a)
+
+radius = 12
+for y2=-radius to radius
+for x2=-radius to radius
+If (y2*y2+x2*x2) <= radius*radius+radius*0.8
+plot x2+xa,y2+ya
+flowmap(i,(x2+xa)/5,(y2+ya)/5) = a
+end if
+next
+next
+until distance(xa,ya,xb,yb)<1
+next
+
+
+return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
