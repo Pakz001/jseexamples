@@ -1,7 +1,6 @@
 // supercars jse
-// by <Your Name Here!>
+// by Pakz001(Rudy van Etten)
 // Created 2022/5/20
-// get a point besides a line.
 
 Symbol 0,"1__0_0/S.0!S,vw0vQQRS!QQRvw0vQv,x.vvQRvw0vQvxxv,x,RQRvwvQvxxv,x,vRQvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv.xxvRSvwvQv,x.vvSSvw0vRSv/S,vw0v?w?v.w00w_w.0?w_w";
 Symbol 1,"1__SRQ,R!Svw00SQv_Svw00SQv_Svww0SQvx/vSvww00Svx/v,ww00Sxv/xvw,00Sxv/xvw,00Sxv/xvw,00Sxvx?vxvw,00Svx/v,ww0SSvx/vSvww0SRRv/SSvw00SRQ.R.SSvw00SRQ.R.SSvw0,vvRQQR.vvw0.wwv/ww";
@@ -11,9 +10,6 @@ Symbol 10,"1__0,S/0/SSRQ?RSSw0,SRQ/RRSvw00SRQQR/Svw00SRRv/RSvw00SSvx/vSvww00Svx/
 Symbol 11,"1__0_0/S.0!S,vw0vQQRS!QQRvw0vQv,x.vvQRvw0vQvxxv,x,RQRvwvQvxxv,x,vRQvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv.xxvRSvwvQv,x.vvSSvw0vRSv/S,vw0v?w?v.w00w_w.0?w_w";
 Symbol 12,"1__0_0@S.0!S.00SRQRS!RQQS00SRQvvx.v,Qv0SRQvxxv.xxvRvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSRRvx,v,xxvSvwSSRvxxv.xxvSvw0vRRvvx.v,Svw0S.v/SSvw0v.w?v?w0w_w!0?w/";
 Symbol 13,"1__SRQ,R!Svw00SQv_Svw00SQv_Svww0SQvx/vSvww00Svx/v,ww00Sxv/xvw,00Sxv/xvw,00Sxv/xvw,00Sxvx?vxvw,00Svx/v,ww0SSvx/vSvww0SRRv/SSvw00SRQ.R.SSvw00SRQ.R.SSvw0,vvRQQR.vvw0.wwv/ww";
-
-
-// follow point that is besides a line.
 
 
 
@@ -27,6 +23,7 @@ cary = 110
 carangle = 0
 carrotation =0
 carframe = 0
+mobile = .1
 
 .start
 botx = 350
@@ -37,12 +34,12 @@ dim ly(10)
 num= 0
 
 for a=359 to 0 step -(359/5)
-lx(num)=screenwidth()/2+(cos(a)*200)
-ly(num)=screenheight()/2+(sin(a)*200)
-lx(num)=lx(num)+rand(-40,40)
-ly(num)=ly(num)+rand(-40,40)
-ly(num)=ly(num)*.6
-num=num+1
+	lx(num)=screenwidth()/2+(cos(a)*200)
+	ly(num)=screenheight()/2+(sin(a)*200)
+	lx(num)=lx(num)+rand(-40,40)
+	ly(num)=ly(num)+rand(-40,40)
+	ly(num)=ly(num)*.6
+	num=num+1
 next
 
 currenttrack = 0
@@ -55,22 +52,22 @@ ax=0;ay=0;bx=0;by=0;cx=0;cy=0
 
 
 repeat
-cls
-setcolor 100,80,90
-// draw track lines
-setthick 48
-for i=0 to 3
-drawline lx(i),ly(i),lx(i+1),ly(i+1)
-next
-drawline lx(4),ly(4),lx(0),ly(0)
-setthick 1
-for i=0 to 4
-gosub racebot
-next
-restart=restart-1
-if restart<0 then goto start
-gosub rotatecar
-flip
+	cls
+	setcolor 100,80,90
+	// draw track lines
+	setthick 48
+	for i=0 to 3
+		drawline lx(i),ly(i),lx(i+1),ly(i+1)
+	next
+	drawline lx(4),ly(4),lx(0),ly(0)
+	setthick 1
+	for i=0 to 4
+		gosub racebot
+	next
+	restart=restart-1
+	if restart<0 then goto start
+	gosub rotatecar
+	flip
 forever
 end
 
@@ -84,7 +81,8 @@ pointy = ly(currenttrack)+sin(a)*travel
 
 pointleftx = pointx+cos(a-90)*mink
 pointlefty = pointy+sin(a-90)*mink
-mink=mink+rand(-1,1)
+if rand(16)==1 then mobile=-mobile
+mink=mink+mobile
 if mink<-16 then mink=-16
 if mink>16 then mink=16
 
@@ -105,10 +103,10 @@ o=0
 if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))<0) then o=-1
 if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))>0) then o=1
 if o==-1 then 
-botangle=botangle-3
+	botangle=botangle-3
 endif
-if o==1
-botangle=botangle+3
+if o==1 then
+	botangle=botangle+3
 endif
 
 
@@ -125,10 +123,10 @@ endif
 
 
 if travel==d then
-currenttrack = nexttrack
-nexttrack = nexttrack+1
-travel = 64
-if nexttrack==5 then nexttrack =0
+	currenttrack = nexttrack
+	nexttrack = nexttrack+1
+	travel = 64
+	if nexttrack==5 then nexttrack =0
 endif
 carx = botx
 cary = boty
@@ -150,6 +148,10 @@ setrotation carrotation
 drawimage carx,cary,carframe
 setrotation 0
 return
+
+
+
+
 
 
 
