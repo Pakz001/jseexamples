@@ -1,0 +1,63 @@
+// math 01
+// by <Your Name Here!>
+// Created 2022/5/20
+// get a point besides a line.
+
+// you might want to have a bot follow a line.
+// you might want the bot to follow besides the line
+// get angle of the line
+// take 90;degrees of to point left side
+// plot a distance ahead to create the point
+
+Graphics 512,512,1
+Print "Hello World"
+
+dim lx(10)
+dim ly(10)
+
+lx(0) = 100
+ly(0) = 100
+lx(1) = 360
+ly(1) = 300
+
+drawline lx(0),ly(0),lx(1),ly(1)
+d = distance(lx(0),ly(0),lx(1),ly(1))
+// angle y(dest)-y(from),x(dest)-x(from)
+a = atan2(ly(1)-ly(0),lx(1)-lx(0))
+
+pointx = lx(0)+cos(a)*d/2
+pointy = ly(0)+sin(a)*d/2
+
+pointleftx = pointx+cos(a-90)*16
+pointlefty = pointy+sin(a-90)*16
+
+rect pointx,pointy,5,5
+rect pointleftx,pointlefty,5,5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
