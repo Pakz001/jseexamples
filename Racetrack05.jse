@@ -1,0 +1,100 @@
+// racetrack 05
+// by <Your Name Here!>
+// Created 2022/5/20
+// get a point besides a line.
+
+// follow point that is besides a line.
+
+botx = 0
+boty = 0
+
+Graphics 512,512,1
+Print "Hello World"
+
+dim lx(10)
+dim ly(10)
+
+lx(0) = 50
+ly(0) = 100
+lx(1) = 100
+ly(1) = 300
+lx(2) = 150
+ly(2) = 300
+lx(3) = 300
+ly(3) = 200
+lx(4) = 100
+ly(4) = 150
+lx(5) = 50
+ly(5) = 100
+
+currentrack = 0
+nexttrack = 1
+repeat
+cls
+// draw track lines
+for i=0 to 4
+drawline lx(i),ly(i),lx(i+1),ly(i+1)
+next
+
+d = distance(lx(currenttrack),ly(currenttrack),lx(nexttrack),ly(nexttrack))
+// angle y(dest)-y(from),x(dest)-x(from)
+a = atan2(ly(nexttrack)-ly(currenttrack),lx(nexttrack)-lx(currenttrack))
+
+pointx = lx(currenttrack)+cos(a)*travel
+pointy = ly(currenttrack)+sin(a)*travel
+
+pointleftx = pointx+cos(a-90)*mink
+pointlefty = pointy+sin(a-90)*mink
+mink=mink+rand(-1,1)
+if mink<-16 then mink=-16
+if mink>16 then mink=16
+
+rect pointx,pointy,5,5
+rect pointleftx,pointlefty,5,5
+
+a = atan2(pointlefty-boty,pointleftx-botx)
+botx=botx+cos(a)
+boty=boty+sin(a)
+if distance(botx,boty,pointleftx,pointlefty)<16 then
+travel=travel+10
+if travel>d then travel=d
+endif
+botx = botx
+rect botx,boty,5,5
+
+
+if travel==d then
+currenttrack = nexttrack
+nexttrack = nexttrack+1
+travel = 24
+if nexttrack==6 then nexttrack =0
+endif
+flip
+forever
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
