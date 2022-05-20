@@ -1,0 +1,144 @@
+// supercars jse
+// by <Your Name Here!>
+// Created 2022/5/20
+// get a point besides a line.
+
+Symbol 0,"1__0,S/0/SSRQ?RSSw0,SRQ/RRSvw00SRQQR/Svw00SRRv/RSvw00SSvx/vSvww00Svx/vvw,00Sxvx?vxvw,00Sxv/xvw,00Sxv/xvw,00Sxv/xvw,00Svx/vvw,0SQvx/vSvww0SQv_Svww0SQv_Svw00SRS_Svw";
+Symbol 1,"1__0_0/S.0!S,vw0vQQRS!QQRvw0vQv,x.vvQRvw0vQvxxv,x,RQRvwvQvxxv,x,vRQvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv.xxvRSvwvQv,x.vvSSvw0vRSv/S,vw0v?w?v.w00w_w.0?w_w";
+Symbol 2,"1__0_0@S.0!S.00SRQRS!RQQS00SRQvvx.v,Qv0SRQvxxv.xxvRvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSRRvx,v,xxvSvwSSRvxxv.xxvSvw0vRRvvx.v,Svw0S.v/SSvw0v.w?v?w0w_w!0?w/";
+Symbol 3,"1__SRQ,R!Svw00SQv_Svw00SQv_Svww0SQvx/vSvww00Svx/v,ww00Sxv/xvw,00Sxv/xvw,00Sxv/xvw,00Sxvx?vxvw,00Svx/v,ww0SSvx/vSvww0SRRv/SSvw00SRQ.R.SSvw00SRQ.R.SSvw0,vvRQQR.vvw0.wwv/ww";
+
+
+// follow point that is besides a line.
+
+
+
+
+Graphics 512,512,1
+Print "Hello World"
+
+.start
+botx = 350
+boty = 250
+botangle = 0
+dim lx(10)
+dim ly(10)
+num= 0
+
+for a=359 to 0 step -(359/5)
+lx(num)=screenwidth()/2+(cos(a)*200)
+ly(num)=screenheight()/2+(sin(a)*200)
+lx(num)=lx(num)+rand(-40,40)
+ly(num)=ly(num)+rand(-40,40)
+ly(num)=ly(num)*.6
+num=num+1
+next
+
+currenttrack = 0
+nexttrack = 1
+restart = 350
+travel=0
+o=0
+ax=0;ay=0;bx=0;by=0;cx=0;cy=0
+
+
+
+repeat
+cls
+setcolor 100,80,90
+// draw track lines
+setthick 48
+for i=0 to 3
+drawline lx(i),ly(i),lx(i+1),ly(i+1)
+next
+drawline lx(4),ly(4),lx(0),ly(0)
+setthick 1
+for i=0 to 4
+gosub racebot
+next
+restart=restart-1
+if restart<0 then goto start
+flip
+forever
+end
+
+.racebot
+d = distance(lx(currenttrack),ly(currenttrack),lx(nexttrack),ly(nexttrack))
+// angle y(dest)-y(from),x(dest)-x(from)
+a = atan2(ly(nexttrack)-ly(currenttrack),lx(nexttrack)-lx(currenttrack))
+
+pointx = lx(currenttrack)+cos(a)*travel
+pointy = ly(currenttrack)+sin(a)*travel
+
+pointleftx = pointx+cos(a-90)*mink
+pointlefty = pointy+sin(a-90)*mink
+mink=mink+rand(-1,1)
+if mink<-16 then mink=-16
+if mink>16 then mink=16
+
+setcolor 255,0,0
+rect pointx,pointy,5,5
+setcolor 0,0,255
+rect pointleftx,pointlefty,5,5
+drawline pointx,pointy,pointleftx,pointlefty
+
+//a= atan2(pointlefty-boty,pointleftx-botx)
+ax = botx
+ay = boty
+bx = ax+(cos(botangle)*1000)
+by = ay+(sin(botangle)*1000)
+cx = pointleftx
+cy = pointlefty
+o=0
+if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))<0) then o=-1
+if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))>0) then o=1
+if o==-1 then 
+botangle=botangle-3
+endif
+if o==1
+botangle=botangle+3
+endif
+
+
+
+botx=botx+cos(botangle)
+boty=boty+sin(botangle)
+if distance(botx,boty,pointleftx,pointlefty)<16 then
+travel=travel+10
+if travel>d then travel=d
+endif
+setcolor 255,255,0
+rect botx,boty,5,5
+//drawline botx,boty,pointleftx,pointlefty
+
+
+if travel==d then
+currenttrack = nexttrack
+nexttrack = nexttrack+1
+travel = 64
+if nexttrack==5 then nexttrack =0
+endif
+return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
