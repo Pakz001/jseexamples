@@ -13,3 +13,6 @@ create a new project and paste a jse file inside it. gfx/sound/music will be par
 <img src="Media/F74EF8BC-607F-4ED7-8146-9B77B84B312D.png" width="60%"><br>
 <img scr="Media/6A9AE2BC-3784-4064-8582-416240AA2D74.png" width="60%"><br>
 <br>
+<br>
+<br>
+Dotate to author of this code repo. (Insert coin) https://www.paypal.me/RudyvanEtten/1
