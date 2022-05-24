@@ -1,0 +1,78 @@
+// avarage heading
+// by <Your Name Here!>
+// Created 2022/5/24
+// dots moving on screen and taking the avarage heading of closest dots.
+Graphics 512,512,1
+Print "Hello World"
+
+num = 10
+dim px(num)
+dim py(num)
+dim mx(num)
+dim my(num)
+
+x=screenwidth()/2
+y=screenheight()/2
+for i=0 to num-1
+px(i) = x + rand(-100,100)
+py(i) = y + rand(-100,100)
+mx(i) = rnd(-3,3)
+my(i) = rnd(-3,3)
+next
+
+repeat
+cls
+for i=0 to num-1
+// randomly change heading
+if rand(10) == 1 then
+mx(i)=mx(i)+rnd(-1,1)
+my(i)=my(i)+rnd(-1,1)
+endif
+// draw
+rect px(i),py(i),5,5
+// update position
+px(i)=px(i)+mx(i)
+py(i)=py(i)+my(i)
+// wrap edges
+if px(i) < 0 then px(i)=screenwidth()
+if py(i) < 0 then py(i)=screenheight()
+if px(i) > screenwidth() then px(i) = 0
+if py(i) > screenheight() then py(i) = 0
+// avarage heading and keep distance
+cx = mx(i)
+cy = my(i)
+cnt=0
+for j=0 to num-1
+if j<>i then
+d=distance(px(i),py(i),px(j),py(j))
+if d<48 then
+cx = cx + mx(j)
+cy = cy + my(j)
+cnt=cnt+1
+endif
+endif
+next
+if cnt>0 then
+mx(i)=cx/(cnt+1)
+my(i)=cy/(cnt+1)
+endif
+// if to close then slow down
+if d<16 then
+mx(i)=mx(i)/10
+my(i)=my(i)/10
+endif
+next
+flip
+forever
+end
+
+
+
+
+
+
+
+
+
+
+
