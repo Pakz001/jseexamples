@@ -1,0 +1,28 @@
+// orientation
+// by <Your Name Here!>
+// Created 2022/5/20
+
+
+// is a point left or on or the right side of a line.
+// for turrets, homing missiles, movement to ... collision
+
+Graphics 512,512,1
+Print "Hello World"
+o=0
+drawline 100,100,400,400
+ax=100
+ay=100
+bx=400
+by=400
+cx=200
+cy=400
+drawrect cx,cy,20,20
+gosub orientation
+print o
+end
+
+.orientation
+o=0
+if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))<0) then o=-1
+if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))>0) then o=1
+return
