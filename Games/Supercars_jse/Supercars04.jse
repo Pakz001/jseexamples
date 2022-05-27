@@ -1,0 +1,206 @@
+// racing take over
+// by Pakz001
+// Created 2022/5/27
+
+Symbol 0,"1__0_0/S.0!S,vw0vQQRS!QQRvw0vQv,x.vvQRvw0vQvxxv,x,RQRvwvQvxxv,x,vRQvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv,x,vRRvwvQvxxv.xxvRSvwvQv,x.vvSSvw0vRSv/S,vw0v?w?v.w00w_w.0?w_w";
+Symbol 1,"1__SRQ,R!Svw00SQv_Svw00SQv_Svww0SQvx/vSvww00Svx/v,ww00Sxv/xvw,00Sxv/xvw,00Sxv/xvw,00Sxvx?vxvw,00Svx/v,ww0SSvx/vSvww0SRRv/SSvw00SRQ.R.SSvw00SRQ.R.SSvw0,vvRQQR.vvw0.wwv/ww";
+Symbol 2,"1__0_0@S.0!S.00SRQRS!RQQS00SRQvvx.v,Qv0SRQvxxv.xxvRvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSQQvx,v,xxvSvwSRRvx,v,xxvSvwSSRvxxv.xxvSvw0vRRvvx.v,Svw0S.v/SSvw0v.w?v?w0w_w!0?w/";
+Symbol 3,"1__0,S/0/SSRQ?RSSw0,SRQ/RRSvw00SRQQR/Svw00SRRv/RSvw00SSvx/vSvww00Svx/vvw,00Sxvx?vxvw,00Sxv/xvw,00Sxv/xvw,00Sxv/xvw,00Svx/vvw,0SQvx/vSvww0SQv_Svww0SQv_Svw00SRS_Svw";
+Symbol 20,"1__Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y.Z_Z/;z_z?wzy_y?xzy_y?v_v@w_w_w_w_w_w_w_w";
+Symbol 21,"1__y?wxxvvZZY.y?w:zyvZZY.y?v:yyvZZY.y?vzyyvZZY.y?vzyyvZZY.y?vzyywvZY.y?wwyyvvZZY,y?xvyvwywZvZZy!xvwy.zzwy/wvy!xy/xwvvy.vy@xwwv?y_xxw?y_yyw?y_y,xw,y_y.xww";
+Symbol 22,"1__y?wxxvvZZY.y?w:zyvZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.y?wy,vZZY.";
+Symbol 23,"1__Y!wwxvvwwy,Y!zy,vwwy,Y!zy,vwwy,Y!zy,vwwy,Y!zy,vwwy,Y!zy,vwwy,Y!wyyvw,y,Y?zwvyvw,y,z.y,wvw.y,xy!vw.xy,vy.vvw.xy.v?w?xy?xw@xy@xw.xy_y_y_y_y.";
+Symbol 24,"1__Y?Zxxwvvw?Y?Z:zyyvw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?Y?Zzy,vw?";
+Symbol 25,"1__y_y_y_y_y_y,w_w/:z_z?xzy_y?xzy_y?v_v@Z_Z_Z_Z_Z_Z_Z_ZY_Y_Y_Y_Y_Y_Y_Y";
+Symbol 26,"1__y_y_y_y_y_y_y_y_yw/y@wz!vy/wzy!xy!wzwy.zzwy?wzyvwywZvZZy?wzyyvvZZY,y.wzzyywvZY.y.wzzyyvZZY.y.wzzyyvZZY.y.wz:yyvZZY.y.wz:zyvZZY.y.wzxxvvZZY.";
+Symbol 27,"1__y_y_y_y_y_y_y_yw?y_yy:z.w,xy/xy!w,xy?z.y,wzwwxy.Y?zwzyzwwxy,Y!wyyzw,y,Y!zy,vwwy,Y!zy,vwwxyyY!zy,vw,yyY!zy,vw,yyY!zy,vw,yyY!wwxvvw,yy";
+
+
+Graphics 512,512,1
+
+
+maxcars = 2
+dim cars(10,10)
+cars(0,0) = 350
+cars(0,1) = 250
+cars(0,2) = 0 // angle
+cars(0,3) = 0 // currenttrack
+cars(0,4) = 1 // nxtrack
+cars(0,5) = 0 // travel
+cars(0,6) = 0 // frame
+cars(0,7) = 1 // colour
+cars(1,0) = 250
+cars(1,1) = 250
+cars(1,2) = 0 // angle
+cars(1,3) = 0 // currenttrack
+cars(1,4) = 1 // nxtrack
+cars(1,5) = 0 // travel
+cars(1,6) = 0
+cars(1,7) = 2
+cars(2,0) = 200
+cars(2,1) = 250
+cars(2,2) = 0 // angle
+cars(2,3) = 0 // currenttrack
+cars(2,4) = 1 // nxtrack
+cars(2,5) = 0 // travel
+cars(2,6) = 0
+cars(2,7) = 3
+
+mima=2
+carx = 120
+cary = 110
+carangle = 0
+carrotation =0
+carframe = 0
+mobile = .1
+
+.start
+botx = 350
+boty = 250
+botangle = 0
+dim lx(10)
+dim ly(10)
+num= 0
+
+for a=359 to 0 step -(359/5)
+	lx(num)=screenwidth()/2+(cos(a)*200)
+	ly(num)=screenheight()/2+(sin(a)*200)
+	lx(num)=lx(num)+rand(-40,40)
+	ly(num)=ly(num)+rand(-40,40)
+	ly(num)=ly(num)*.6
+	num=num+1
+next
+
+currenttrack = 0
+nxttrack = 1
+restart = 350
+travel=0
+o=0
+ax=0;ay=0;bx=0;by=0;cx=0;cy=0
+
+
+print "banana"
+repeat
+	cls
+	setcolor 100,80,90
+	// draw track lines
+	setthick 48
+	for i=0 to 3
+		drawline lx(i),ly(i),lx(i+1),ly(i+1)
+	next
+	drawline lx(4),ly(4),lx(0),ly(0)
+	setthick 1
+	//
+	//
+	
+	for j=0 to maxcars
+	carx = cars(j,0)
+	cary = cars(j,1)
+	carangle = cars(j,2)
+	currenttrack = cars(j,3)
+	nxttrack = cars(j,4)
+	travel = cars(j,5)
+	carframe = cars(j,6)
+	carcolour = cars(j,7)
+	for i=0 to 4
+		gosub racebot
+	next
+	gosub rotatecar
+	cars(j,0)=carx
+	cars(j,1)=cary
+	cars(j,2)=carangle
+	cars(j,3)=currenttrack
+	cars(j,4)=nxttrack
+	cars(j,5)=travel
+	cars(j,6)=carframe
+	next j
+	//
+	//
+	
+	restart=restart-1
+	if restart<0 then goto start
+	
+	flip
+forever
+end
+
+.racebot
+botx = carx
+boty = cary
+botangle = carangle
+d = distance(lx(currenttrack),ly(currenttrack),lx(nxttrack),ly(nxttrack))
+// angle y(dest)-y(from),x(dest)-x(from)
+a = atan2(ly(nxttrack)-ly(currenttrack),lx(nxttrack)-lx(currenttrack))
+
+pointx = lx(currenttrack)+cos(a)*travel
+pointy = ly(currenttrack)+sin(a)*travel
+
+pointleftx = pointx+cos(a-90)*mink
+pointlefty = pointy+sin(a-90)*mink
+if rand(16)==1 then mobile=-mobile
+mink=mink+mobile
+if mink<-16 then mink=-16
+if mink>16 then mink=16
+
+//setcolor 255,0,0
+//rect pointx,pointy,5,5
+//setcolor 0,0,255
+//rect pointleftx,pointlefty,5,5
+//drawline pointx,pointy,pointleftx,pointlefty
+
+//a= atan2(pointlefty-boty,pointleftx-botx)
+ax = botx
+ay = boty
+bx = ax+(cos(botangle)*1000)
+by = ay+(sin(botangle)*1000)
+cx = pointleftx
+cy = pointlefty
+o=0
+if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))<0) then o=-1
+if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))>0) then o=1
+if o==-1 then 
+	botangle=botangle-3
+endif
+if o==1 then
+	botangle=botangle+3
+endif
+
+
+
+botx=botx+cos(botangle)
+boty=boty+sin(botangle)
+if distance(botx,boty,pointleftx,pointlefty)<16 then
+travel=travel+10
+if travel>d then travel=d
+endif
+//setcolor 255,255,0
+//rect botx,boty,5,5
+//drawline botx,boty,pointleftx,pointlefty
+
+
+if travel==d then
+	currenttrack = nxttrack
+	nxttrack = nxttrack+1
+	travel = 64
+	if nxttrack==5 then nxttrack =0
+endif
+carx = botx
+cary = boty
+carangle = botangle
+return
+
+
+
+.rotatecar
+//if rand(100)==1 then mima = -mima
+//carangle=carangle+mima
+carangle = carangle % 360
+if carangle<0 then carangle = carangle+360
+if carangle >= 0 and carangle<90 then carframe = 0 ; carrotation = carangle
+if carangle >= 90 and carangle<180 then carframe = 1 ; carrotation = carangle-90
+if carangle >= 180 and carangle <270 then carframe = 2;carrotation=carangle-180
+if carangle >= 280 and carangle<360 then carframe = 3;carrotation=carangle-270
+setrotation carrotation
+drawimage carx,cary,carframe,carcolour
+setrotation 0
+return
