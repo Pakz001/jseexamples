@@ -294,8 +294,10 @@ posy = boty-camy+sin(botangle)*32
 for ij=0 to maxcars
 if distance(cars(ij,0),cars(ij,1),botx,boty) > 0 then
 if distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy) < 32 then
-if carspeed>.5 then carspeed=carspeed-.01
+if carspeed>0 then carspeed=carspeed-.01
 carovertake=100
+setcolor 255,255,255
+drawrect 0,0,20,20
 else
 if carspeed<1.0 then carspeed=carspeed+.0004
 end if
