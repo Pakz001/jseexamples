@@ -161,7 +161,16 @@ repeat
 	cars(j,12)=carmaxspeed
 	next j
 	//
-	//
+	// line overlay arcade fx
+	setcolor 0,0,0
+	setalpha .5
+	setblendmode 1
+	setthick .1
+	for y=0 to screenheight() step 3
+	drawline 0,y,screenwidth(),y
+	next
+	setalpha 1
+	setblendmode 0
 	
 	restart=restart-1
 	if restart<0 then goto start
