@@ -186,7 +186,7 @@ pointy = ly(currenttrack)+sin(a)*travel
 
 pointleftx = pointx+cos(a-90)*mink
 pointlefty = pointy+sin(a-90)*mink
-if rand(64)==1 then mobile=-mobile
+if rand(240)==1 then mobile=-mobile
 mink=mink+mobile
 if mink<-24 then mink=-24
 if mink>24 then mink=24
@@ -216,12 +216,14 @@ endif
 
 if carovertake>0 then carovertake=carovertake-1
 
+
+if carspeed>carmaxspeed then carspeed=carspeed-.001
+if carspeed<carmaxspeed then carspeed=carspeed+0.001
+if rand(100/carpersonality)==1 and carspeed<1.2 then carspeed=carspeed+.1
+
 gosub setcarspeed
 if carovertake==0 then gosub overtake
 gosub setbend
-if carspeed>carmaxspeed then carspeed=carspeed-.001
-if carspeed<carmaxspeed then carspeed=carspeed+0.001
-if rand(32/carpersonality)<5 and carmaxspeed>.9 and carmaxspeed<1.3 then carmaxspeed=carmaxspeed+rnd(-.01,.01)
 
 botx=botx+cos(botangle)*carspeed
 boty=boty+sin(botangle)*carspeed
@@ -293,7 +295,7 @@ posx = botx-camx+cos(botangle)*32
 posy = boty-camy+sin(botangle)*32
 for ij=0 to maxcars
 if distance(cars(ij,0),cars(ij,1),botx,boty) > 0 then
-if distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy) < 22 then
+if distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy) < 28 then
 if carspeed>.5 then carspeed=carspeed-.01
 else
 if carspeed<1.0 then carspeed=carspeed+.0004
