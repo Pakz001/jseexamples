@@ -170,7 +170,7 @@ pointy = ly(currenttrack)+sin(a)*travel
 
 pointleftx = pointx+cos(a-90)*mink
 pointlefty = pointy+sin(a-90)*mink
-if rand(16)==1 then mobile=-mobile
+if rand(64)==1 then mobile=-mobile
 mink=mink+mobile
 if mink<-16 then mink=-16
 if mink>16 then mink=16
@@ -192,10 +192,10 @@ o=0
 if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))<0) then o=-1
 if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))>0) then o=1
 if o==-1 then 
-	botangle=botangle-3
+	botangle=botangle-2
 endif
 if o==1 then
-	botangle=botangle+3
+	botangle=botangle+2
 endif
 
 gosub setcarspeed
@@ -247,8 +247,8 @@ posx = botx-camx+cos(botangle)*32
 posy = boty-camy+sin(botangle)*32
 for ij=0 to maxcars
 if distance(cars(ij,0),cars(ij,1),botx,boty) > 0 then
-if distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy) < 24 then
-carspeed=carspeed-.01
+if distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy) < 32 then
+if carspeed>.5 then carspeed=carspeed-.01
 else
 if carspeed<1.0 then carspeed=carspeed+.0004
 end if
