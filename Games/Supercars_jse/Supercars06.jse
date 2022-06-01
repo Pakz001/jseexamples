@@ -199,12 +199,14 @@ if o==1 then
 endif
 
 gosub setcarspeed
+gosub setbend
+
 
 botx=botx+cos(botangle)*carspeed
 boty=boty+sin(botangle)*carspeed
 if current==0 then
-camx=camx+cos(botangle)
-camy=camy+sin(botangle)
+camx=camx+cos(botangle)*carspeed
+camy=camy+sin(botangle)*carspeed
 endif
 if distance(botx,boty,pointleftx,pointlefty)<16 then
 travel=travel+10
@@ -226,10 +228,21 @@ cary = boty
 carangle = botangle
 return
 
+
+.setbend
+
+if distance(travel,0,d,0)<256 then 
+if carspeed>.7 then carspeed=carspeed-0.005
+
+else
+
+endif
+
+return
 // we check ahead if a other car is in the way. then slow down else speed up.
 //
 .setcarspeed
-setcolor 255,255,255
+//setcolor 255,255,255
 posx = botx-camx+cos(botangle)*32
 posy = boty-camy+sin(botangle)*32
 for ij=0 to maxcars
@@ -237,11 +250,11 @@ if distance(cars(ij,0),cars(ij,1),botx,boty) > 0 then
 if distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy) < 24 then
 carspeed=carspeed-.01
 else
-if carspeed<1.0 then carspeed=carspeed+.01
+if carspeed<1.0 then carspeed=carspeed+.0004
 end if
 end if
 next
-drawoval posx,posy,64,64
+//drawoval posx,posy,64,64
 return
 
 
