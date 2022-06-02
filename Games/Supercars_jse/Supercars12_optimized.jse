@@ -40,7 +40,7 @@ Graphics 512,512,2
 
 .start
 
-maxcars = 7 //10 = 30 fps on ipad pro
+maxcars = 8 // change this to lower to speed up fps. (8 is 60 fps on ipad pro 2021, 5 = 60 fps on ryzen 4800)
 
 //
 // dim was originall dim cars(10,10)
@@ -192,14 +192,14 @@ repeat
 	//
 	// line overlay arcade fx
 	setcolor 0,0,0
-	setalpha .25
-	setblendmode 1
+	setalpha .15
+	//setblendmode 1
 	setthick 1.5
 	for y=0 to screenheight() step 3
 	drawline 0,y,screenwidth(),y
 	next
 	setalpha 1
-	setblendmode 0
+	//setblendmode 0
 	
 	restart=restart-1
 	if restart<0 then goto start
