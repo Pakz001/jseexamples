@@ -407,7 +407,7 @@ for i=0 to maxcars
 cnt=0
 for j=0 to maxcars
 d = distance(cars(i,0),cars(i,1),cars(j,0),cars(j,1))
-if d>0 and d<256 then
+if d>0 and d<160 then
 quick(i,cnt)=j
 cnt=cnt+1
 endif
