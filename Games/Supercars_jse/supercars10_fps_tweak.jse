@@ -44,7 +44,7 @@ cars(0,9) = 0 // mink
 cars(0,10) = 1 // speed
 cars(0,11) = 350 // no overtake counter
 cars(0,12) = 1 // maxspeed
-cars(0,13)=50//personality
+cars(0,13)=50//personality Higher is better
 
 
 
@@ -62,7 +62,7 @@ cars(i,9) = 0 // mink
 cars(i,10) = 1 // speed
 cars(i,11) = 350 // no overtake counter
 cars(i,12) = 1 // maxspeed
-cars(i,13)=rand(1,10)//personality
+cars(i,13)=rand(1,5)//personality low is easier to take over.
 next
 
 mima=2
