@@ -51,7 +51,7 @@ dim cars(10,20)
 dim lx(20)
 dim ly(20)
 
-cars(0,0) = 1400
+cars(0,0) = maxcars*160
 cars(0,1) = 0
 cars(0,2) = 0 // angle
 cars(0,3) = 0 // currenttrack
@@ -282,7 +282,7 @@ return
 
 // cars next to each other handling
 .carside
-setcolor 255,255,255
+//setcolor 255,255,255
 posx = carx-camx
 posy = cary-camy
 for ij=0 to maxcars
@@ -320,8 +320,8 @@ mink=mink*0.5
 carspeed=1.6
 cars(ij,11)=600
 endif
-setcolor 255,255,255
-drawrect 0,0,10,10
+//setcolor 255,255,255
+//drawrect 0,0,10,10
 //if carspeed>.5 then carspeed=carspeed-.01
 //else
 //if carspeed<1.0 then carspeed=carspeed+.0004
@@ -354,12 +354,12 @@ for ij=0 to maxcars
 if distance(cars(ij,0),cars(ij,1),carx,cary) > 0 then
 q= distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy)
 if q<32 then // if close then break a bit
-if carspeed>0.3 then carspeed=carspeed-.020
+if carspeed>0.3 then carspeed=carspeed-.03
 carovertake=100
 b = cars(ij,9)
 if mink<b then mink=mink-2
 if mink>b then mink=mink+2
-setcolor 255,255,255
+//setcolor 255,255,255
 //drawrect 0,0,20,20
 else
 if carspeed<1.0 then carspeed=carspeed+.0004
