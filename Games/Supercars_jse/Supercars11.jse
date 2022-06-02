@@ -36,11 +36,11 @@ Symbol 93,"1__y!xwwzy?vy.xwwzy.wvvZyyxwwy?wvvZ,xwwzwy,wvvZ?wy.wwvvZ?YYy.wvvZ!Y,y
 Symbol 94,"1__vvY_Y?vY_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y?";
 
 
-Graphics 512,512,1
+Graphics 512,512,2
 
 .start
 
-maxcars = 10
+maxcars = 7 //10 = 30 fps on ipad pro
 
 //
 // dim was originall dim cars(10,10)
@@ -336,15 +336,17 @@ return
 if distance(travel,0,d,0)<256 then 
 mink=mink+.5
 if carspeed>.7 then carspeed=carspeed-0.005
-
-else
-
 endif
 
 return
+
+
 // we check ahead if a other car is in the way. then slow down else speed up.
 //
 .setcarspeed
+
+// if we get close to another car
+// break..
 //setcolor 255,255,255
 posx = carx-camx+cos(carangle)*32
 posy = cary-camy+sin(carangle)*32
