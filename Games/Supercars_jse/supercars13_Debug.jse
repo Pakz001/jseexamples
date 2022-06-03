@@ -49,7 +49,7 @@ Graphics 512,512,2
 
 .start
 
-maxcars = 7 // change this to lower to speed up fps. (8 is 60 fps on ipad pro 2021, 5 = 60 fps on ryzen 4800)
+maxcars = 1 // change this to lower to speed up fps. (8 is 60 fps on ipad pro 2021, 5 = 60 fps on ryzen 4800)
 
 //
 // dim was originall dim cars(10,10)
@@ -59,6 +59,7 @@ dim quick(maxcars,maxcars+1) // list of closeby cars around each car (optimalisa
 dim cars(maxcars,20)
 dim lx(20)
 dim ly(20)
+
 
 cars(0,0) = maxcars*160
 cars(0,1) = 0
@@ -154,13 +155,15 @@ ax=0;ay=0;bx=0;by=0;cx=0;cy=0
 gosub makequicklist
 repeat
 
-	if keydown(asc("A")) then
+	thiskey=inkey()
+	if thiskey=="a" then
 		gosub savestate
 		//debug camx
 	endif
-	if keydown(asc("B")) then
+	if thiskey=="b" then
 		gosub loadstate
 		//debug camx
+		//debug "banana" 
 	endif
 
 	quickcnt=quickcnt-1
@@ -265,6 +268,7 @@ by = ay+(sin(carangle)*1000)
 cx = pointleftx
 cy = pointlefty
 o=0
+
 if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))<0) then o=-1
 if(((bx-ax)*(cy-ay)-(by-ay)*(cx-ax))>0) then o=1
 if o==-1 then 
@@ -286,14 +290,15 @@ gosub setcarspeed
 if carovertake==0 then gosub overtake
 gosub setbend
 
-
-
 carx=carx+cos(carangle)*carspeed
 cary=cary+sin(carangle)*carspeed
+
 if current==0 then
 camx=camx+cos(carangle)*carspeed
 camy=camy+sin(carangle)*carspeed
 endif
+
+
 if distance(carx,cary,pointleftx,pointlefty)<48 then
 travel=travel+10
 if travel>d then travel=d
@@ -461,13 +466,14 @@ writefile(ding,cars(qi,qii))
 ding=ding+1
 next
 next
+
 for qi=0 to 20
 writefile(ding,lx(qi))
 ding=ding+1
 writefile(ding,ly(qi))
 ding=ding+1
 next
-WriteFile ding,camx
+WriteFile(ding,camx)
 ding=ding+1
 writefile(ding,camy)
 ding=ding+1
@@ -484,7 +490,7 @@ ding=ding+1
 writefile(ding,cy)
 ding=ding+1
 for qi=0 to maxcars
-for qii=0 to maxcars+1
+for qii=0 to maxcars
 writefile(ding,quick(qi,qii) 
 ding=ding+1
 next
@@ -493,53 +499,58 @@ writefile(ding,quickcnt)
 ding=ding+1
 writefile(ding,o)
 
+SaveFile
+
 return
 
 .loadstate
-
-LoadFile
+//emptyfile
+loadfile
 
 ding=0
 for qi=0 to maxcars
 for qii=0 to 14
-cars(qi,qii) = readfile(ding)
+cars(qi,qii) =float( readfile(ding))
 ding=ding+1
 next
 next
+
+
 for qi=0 to 20
-lx(qi) = readfile(ding)
+lx(qi) = float(readfile(ding))
 ding=ding+1
-ly(qi) = readfile(ding)
+ly(qi) = float(readfile(ding))
 ding=ding+1
 next
-camx = ReadFile(ding)
+camx =float( ReadFile(ding))
 
 ding=ding+1
-camy = readfile(ding)
+camy = float(readfile(ding))
+
 ding=ding+1
-ax = readfile(ding)
+ax = float(readfile(ding))
 ding=ding+1
-ay = readfile(ding)
+ay = float(readfile(ding))
 ding=ding+1
-bx = readfile(ding)
+bx = float(readfile(ding))
 ding=ding+1
-by = readfile(ding)
+by = float(readfile(ding))
 ding=ding+1
-cx = readfile(ding)
+cx = float(readfile(ding))
 ding=ding+1
-cy = readfile(ding)
+cy = float(readfile(ding))
 ding=ding+1
 for qi=0 to maxcars
 for qii=0 to maxcars
-quick(qi,qii)= readfile(ding) // list of closeby cars around each car (optimalisation)
+quick(qi,qii)= float(readfile(ding)) // list of closeby cars around each car (optimalisation)
 ding=ding+1
 next
 next
-quickcnt = readfile(ding)
+quickcnt = float(readfile(ding))
 ding=ding+1
-o = readfile(ding)
-return
+o = float(readfile(ding))
 
+return
 
 
 
