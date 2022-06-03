@@ -5,6 +5,8 @@
 //
 // Debug build. Press b to reload state. State is saved to disk by pressing a.
 //
+// Usage : press a every now and then. When a bug appears you then can press b to see if you have
+// catched it and if it reoccurs. The state is saved to disk and you can start to investigate.
 //
 //
 
@@ -42,7 +44,7 @@ Symbol 92,"1__y_y_y_y_y_y_y_yw_w/:z_z?xzy_y?xzy_y?v_v@Z_Z_Z_Z_Z_Z_Z_ZY_Y_Y_Y_Y_Y
 Symbol 93,"1__y!xwwzy?vy.xwwzy.wvvZyyxwwy?wvvZ,xwwzwy,wvvZ?wy.wwvvZ?YYy.wvvZ!Y,yywvvZ!Y?wvvZ?Y@vZ!Y_Z!Y_YZ.Y_Y,Z,Y_Y.ZY_Y_Y_Y_Y_Y_Y_";
 Symbol 94,"1__vvY_Y?vY_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y_Y?";
 
-
+debugmode on
 Graphics 512,512,2
 
 .start
@@ -143,7 +145,7 @@ travel=0
 o=0
 ax=0;ay=0;bx=0;by=0;cx=0;cy=0
 
-gosub savestate
+//gosub savestate
 //gosub loadstate
 
 
@@ -153,9 +155,12 @@ gosub makequicklist
 repeat
 
 	if keydown(asc("A")) then
+		gosub savestate
+		//debug camx
 	endif
 	if keydown(asc("B")) then
 		gosub loadstate
+		//debug camx
 	endif
 
 	quickcnt=quickcnt-1
@@ -448,43 +453,91 @@ return
 
 .savestate
 ding=0
+emptyfile
 
-for i=0 to maxcars
-for ii=0 to 14
-writefile ding,cars(i,ii)
+for qi=0 to maxcars
+for qii=0 to 14
+writefile(ding,cars(qi,qii))
 ding=ding+1
 next
 next
-for i=0 to 20
-writefile ding,lx(i)
+for qi=0 to 20
+writefile(ding,lx(qi))
 ding=ding+1
-writefile ding,ly(i)
+writefile(ding,ly(qi))
 ding=ding+1
 next
-writefile ding,camx
+WriteFile ding,camx
 ding=ding+1
-writefile ding,camy
+writefile(ding,camy)
 ding=ding+1
+writefile(ding,ax)
+ding=ding+1
+writefile(ding,ay)
+ding=ding+1
+writefile(ding,bx)
+ding=ding+1
+writefile(ding,by)
+ding=ding+1
+writefile(ding,cx)
+ding=ding+1
+writefile(ding,cy)
+ding=ding+1
+for qi=0 to maxcars
+for qii=0 to maxcars+1
+writefile(ding,quick(qi,qii) 
+ding=ding+1
+next
+next
+writefile(ding,quickcnt)
+ding=ding+1
+writefile(ding,o)
+
 return
 
 .loadstate
+
+LoadFile
+
 ding=0
-for i=0 to maxcars
-for ii=0 to 14
-cars(i,ii) = readfile(ding)
+for qi=0 to maxcars
+for qii=0 to 14
+cars(qi,qii) = readfile(ding)
 ding=ding+1
 next
 next
-for i=0 to 20
-lx(i) = readfile(ding)
+for qi=0 to 20
+lx(qi) = readfile(ding)
 ding=ding+1
-ly(i) = readfile(ding)
+ly(qi) = readfile(ding)
 ding=ding+1
 next
-camx = readfile(ding)
+camx = ReadFile(ding)
+
 ding=ding+1
 camy = readfile(ding)
 ding=ding+1
+ax = readfile(ding)
+ding=ding+1
+ay = readfile(ding)
+ding=ding+1
+bx = readfile(ding)
+ding=ding+1
+by = readfile(ding)
+ding=ding+1
+cx = readfile(ding)
+ding=ding+1
+cy = readfile(ding)
+ding=ding+1
+for qi=0 to maxcars
+for qii=0 to maxcars
+quick(qi,qii)= readfile(ding) // list of closeby cars around each car (optimalisation)
+ding=ding+1
+next
+next
+quickcnt = readfile(ding)
+ding=ding+1
+o = readfile(ding)
 return
 
 
