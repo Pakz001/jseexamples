@@ -50,7 +50,7 @@ Graphics 512,512,2
 .start
 
 // debug saving works only with 7 or less cars..
-maxcars = 7 // change this to lower to speed up fps. (9 is 60 fps on ipad pro 2021, 5 = 60 fps on ryzen 4800)
+maxcars = 7 // change this to lower to speed up fps. (15 is 60 fps on ipad pro 2021, 5 = 60 fps on ryzen 4800)
 
 
 
@@ -149,14 +149,18 @@ ax=0;ay=0;bx=0;by=0;cx=0;cy=0
 //gosub loadstate
 
 
-
+savetemp=0
 
 gosub makequicklist
 repeat
-
+	//savetemp=savetemp+1
+	if savetemp>119 then
+	gosub savestate
+	savetemp=0
+	end if
 	thiskey=inkey()
 	if gamepad(buttonb,-1) then
-		gosub savestate
+		//gosub savestate
 		//debug camx
 	endif
 	if gamepad(buttona,-1) then
@@ -358,7 +362,7 @@ return
 if rand(100)<99 then return
 posx = carx-camx+cos(carangle)*32
 posy = cary-camy+sin(carangle)*32
-if distance(travel,0,d,0) < 256 then return
+//if distance(travel,0,d,0) < 256 then return
 for ii=0 to maxcars
 if quick(current,ii)==-1 then break
 ij = quick(current,ii)
@@ -404,25 +408,27 @@ return
 posx = carx-camx+cos(carangle)*32
 posy = cary-camy+sin(carangle)*32
 for ii=0 to maxcars
-if quick(current,ii)==-1 then break
-ij = quick(current,ii)
-if distance(cars(ij,0),cars(ij,1),carx,cary) > 0 then
-q= distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy)
-if q<32 then // if close then break a bit
-if carspeed>0.3 then carspeed=carspeed-.03
-carovertake=100
-b = cars(ij,9)
-if mink<b then mink=mink-2
-if mink>b then mink=mink+2
-//setcolor 255,255,255
-//drawrect 0,0,20,20
-else
-if carspeed<1.0 then carspeed=carspeed+.0004
-end if
-endif
-if q<16 then // if to close break more!
-if carspeed>0.3 then carspeed=carspeed-.03
-endif
+	if quick(current,ii)==-1 then break
+	ij = quick(current,ii)
+	if distance(cars(ij,0),cars(ij,1),carx,cary) > 0 then
+		q= distance(cars(ij,0)-camx,cars(ij,1)-camy,posx,posy)
+		if q<32 then // if close then break a bit
+			if carspeed>0.3 then carspeed=carspeed-.03
+			carovertake=100
+			b = cars(ij,9)
+			if mink<b then mink=mink-2
+			if mink>b then mink=mink+2
+			//setcolor 255,255,255
+			//drawrect 0,0,20,20
+		else
+			if carspeed<1.0 then carspeed=carspeed+.0004
+		end if
+		if q<8 then // if to close break more!
+			//setcolor 255,255,255
+			//rect 0,0,320,320
+			if carspeed>0.3 then carspeed=carspeed-.03
+		endif
+	endif
 
 next
 //drawoval posx,posy,64,64
