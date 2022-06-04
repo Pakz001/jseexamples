@@ -1,0 +1,83 @@
+// Follow the leader
+// by <Pakz001>
+// Created 2022/6/5
+//
+// Units follow leader. A sort of cookie crum technique.
+// The units move to a new location on the screen. The
+// leader moves in front. The other units follow him one
+// by one. Other references: The video game snake.
+//
+Graphics 512,512,1
+Print "Hello World"
+
+destx = 100
+desty = 100
+maxunits = 5
+dim units(maxunits,20)//x,y,angle,speed,destx,desty
+units(0,0)=320
+units(0,1)=240
+units(0,3)=1
+for i=0 to maxunits
+
+next
+gosub newdest
+
+repeat
+cls
+setcolor 255,255,0
+drawrect units(0,0),units(0,1),10,10
+setcolor 255,0,0
+drawrect destx,desty,10,10
+if mousedown()
+destx = mousex()
+desty = mousey()
+end if
+gosub moveunits
+gosub drawunits
+flip
+forever
+end
+
+.newdest
+for i=1 to maxunits
+	units(i,4) = units(0,0)
+	units(i,5) = units(0,1)
+next
+return
+
+.moveunits
+a = atan2(desty-units(0,1),destx-units(0,0))
+units(0,0)=units(0,0)+cos(a)*units(0,3)
+units(0,1)=units(0,1)+sin(a)*units(0,3)
+for j=1 to maxunits
+if distance(units(0,0),units(0,1),units(j,4),units(j,5))>(j*20) then
+a = atan2(units(0,1)-units(j,5),units(0,0)-units(j,4))
+units(j,4)=units(j,4)+cos(a)
+units(j,5)=units(j,5)+sin(a)
+end if
+next
+return
+
+.drawunits
+for i=0 to maxunits
+setcolor 100,100,100
+drawrect units(i,4)+4,units(i,5)+4,8,8
+next
+return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
