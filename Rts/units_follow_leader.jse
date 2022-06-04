@@ -7,7 +7,7 @@
 // leader moves in front. The other units follow him one
 // by one. Other references: The video game snake.
 //
-Graphics 512,512,1
+Graphics 512,512,2
 Print "Hello World"
 
 destx = 100
@@ -24,6 +24,12 @@ gosub newdest
 
 repeat
 cls
+setcolor 100,100,100:drawrect 100,4,10,10
+setcolor 200,200,200:text 130,10,"Unit destination in line"
+setcolor 255,255,0:drawrect 100,24,10,10
+setcolor 200,200,200:text 130,28,"Leader"
+setcolor 200,200,200:text 100,screenheight()-120,"Touch/press screen = new dest"
+
 setcolor 255,255,0
 drawrect units(0,0),units(0,1),10,10
 setcolor 255,0,0
@@ -59,7 +65,7 @@ next
 return
 
 .drawunits
-for i=0 to maxunits
+for i=1 to maxunits
 setcolor 100,100,100
 drawrect units(i,4)+4,units(i,5)+4,8,8
 next
